@@ -5,37 +5,38 @@
 
 using namespace std;
 
-int main()
-{
-    while (true)
-    {
-        cout << "\n1. Two Sum Problem." << endl;
+int main() {
+
+    while (true) {
+
+        cout << "\n1. TwoSum." << endl;
         cout << "2. Valid Parenthesis." << endl;
-        cout << "3. Exit..." << endl;
+        cout << "3. Exit.." << endl;
 
         int choice;
         cout << "Enter your choice: ";
         cin >> choice;
 
+
         // Exit
-        if (choice == 3)
-        {
-            cout << "Program exited." << endl;
+        if (choice == 3) {
+            cout << "Program exited..." << endl;
             break;
         }
 
+
         // Two Sum
-        if (choice == 1)
-        {
+        if (choice == 1) {
+
             int n;
 
-            cout << "\nEnter number of elements: ";
+            cout << "Enter number of elements: ";
             cin >> n;
 
             vector<int> nums;
 
-            for (int i = 0; i < n; i++)
-            {
+            for (int i = 0; i < n; i++) {
+
                 int element;
 
                 cout << "Enter element " << i + 1 << ": ";
@@ -44,33 +45,23 @@ int main()
                 nums.push_back(element);
             }
 
-            cout << "nums = ";
-
-            for (int num : nums)
-            {
-                cout << num << " ";
-            }
-
-            cout << endl;
-
             int target;
-            cout << "Enter the target value: ";
+
+            cout << "Enter target value: ";
             cin >> target;
 
-            unordered_map<int, int> hashmap;
 
             bool found = false;
 
-            for (int i = 0; i < nums.size(); i++)
-            {
+            unordered_map<int, int> hashmap;
+
+            for (int i = 0; i < nums.size(); i++) {
+
                 int diff = target - nums[i];
 
-                if (hashmap.find(diff) != hashmap.end())
-                {
-                    cout << "The two sum indexes of "
-                         << target << ": ["
-                         << hashmap[diff] << ", "
-                         << i << "]" << endl;
+                if (hashmap.find(diff) != hashmap.end()) {
+
+                    cout << "Result: [" << hashmap[diff] << ", " << i << "]" << endl;
 
                     found = true;
                     break;
@@ -79,75 +70,75 @@ int main()
                 hashmap[nums[i]] = i;
             }
 
-            if (!found)
-            {
-                cout << "Not Exist..." << endl;
+            if (!found) {
+                cout << "Not Found..." << endl;
             }
         }
 
+
         // Valid Parentheses
-        else if (choice == 2)
-        {
+        else if (choice == 2) {
+
             string s;
 
-            cout << "\nEnter the string: ";
+            cout << "Enter the string: ";
             cin >> s;
+
+            bool value = true;
 
             stack<char> st;
 
-            bool valid = true;
 
-            for (char ch : s)
-            {
-                // Opening brackets
-                if (ch == '(' || ch == '[' || ch == '{')
-                {
+            for (char ch : s) {
+
+                // Opening bracket
+                if (ch == '(' || ch == '[' || ch == '{') {
+
                     st.push(ch);
                 }
 
-                // Closing brackets
-                else
-                {
-                    if (st.empty())
-                    {
-                        valid = false;
+                // Closing bracket
+                else {
+
+                    if (st.empty()) {
+                        value = false;
                         break;
                     }
 
                     char top = st.top();
+
                     st.pop();
 
-                    if (ch == ')' && top != '(')
-                    {
-                        valid = false;
+
+                    if (ch == ')' && top != '(') {
+                        value = false;
                         break;
                     }
 
-                    if (ch == ']' && top != '[')
-                    {
-                        valid = false;
+                    if (ch == ']' && top != '[') {
+                        value = false;
                         break;
                     }
 
-                    if (ch == '}' && top != '{')
-                    {
-                        valid = false;
+                    if (ch == '}' && top != '{') {
+                        value = false;
                         break;
                     }
                 }
             }
 
-            if (!st.empty())
-            {
-                valid = false;
+
+            // Opening brackets still remaining
+            if (!st.empty()) {
+                value = false;
             }
 
-            cout << "Valid: " << boolalpha << valid << endl;
+            cout << boolalpha << value << endl;
         }
 
-        else
-        {
-            cout << "Invalid choice!" << endl;
+
+        else {
+            cout << "Invalid Choice!" << endl;
         }
     }
 
